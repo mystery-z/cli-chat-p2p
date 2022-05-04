@@ -14,7 +14,7 @@ JSON will contain the following:
 
 ### How the packets will work:
 
-Hey guys Chris logging on here- notice we have a library (smoltcp) that handles TCP packets etc.
+So we have a library (smoltcp) that handles TCP packets etc.
 
 But there is a default-included package [std::net](https://doc.rust-lang.org/std/net/index.html) including some seemingly useful structs “TcpListener” and “TcpStream” which allow to both send and receive data with the option to deny/allow connections from a certain IP address. This seems adequate enough to build around, and to add on, this package actually HANDLES TCP IN ITS ENTIRETY as in it handles packet loss etc.
 
@@ -60,9 +60,7 @@ Handled by [std::net](https://doc.rust-lang.org/std/net/index.html) by default
 
 ### Interface
 
-Yo y’all this is notRamji typin in Maths class, evading the watchful eye of McReady the notReady
-
-anyways for the interface we can just do a simple input from cmd / terminal kinda thing, like this:
+For the interface we can just do a simple input from cmd / terminal kinda thing, like this:
 
 ```rust
 use std::io;
@@ -75,13 +73,12 @@ fn main() {
 
 Just for simplicity, I made the string mutable just because then we can reuse the variable, and this is also appr more efficient for memory.
 
-Btw, std::io is a default in Rust, and is included so we probs don’t need to install anything for this
+Also, std::io is a default in Rust, and is included so we probs don’t need to install anything for this
 
-This is encoded it in UTF-08 format, since we probs aren’t gonna be typing japanese or chinese UTF-08 suits most of our needs (english, french and korean). We don’t need to do any extra code because by default, Rust encodes strings in UTF-08
+This is encoded it in UTF-08 format.
 
 ### From input to .json file
 
-Again, it’s notRamji in notReady’s class typin
 
 I found two options for this: we can either follow [this](https://www.educba.com/rust-json/) tutorial
 
