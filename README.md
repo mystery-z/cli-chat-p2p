@@ -1,6 +1,6 @@
 # cli-chat-p2p
 
-#protocol
+### protocol
 TCP-type handshake to initiate P2P packet exchange.
 Once consented, packets are free to be exchanged
 Per-packet acknowledgement will not occur
@@ -9,7 +9,6 @@ JSON will contain the following:
 - Message type (text, file, etc?)
 - Message
 
-#Planning
 
 
 ### How the packets will work:
