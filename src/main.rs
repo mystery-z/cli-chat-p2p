@@ -3,9 +3,9 @@ use chrono::prelude::*;
 
 
 fn main() {
-    get_real_time(get_unix_time());
+    let time = get_real_time(get_unix_time());
 
-    // println!("{}", time)
+    println!("{:?}", time);
 }
 
 fn get_unix_time() -> i64{
@@ -17,7 +17,7 @@ fn get_unix_time() -> i64{
     }
 }
 
-fn get_real_time(_unix_time: i64){
+fn get_real_time(_unix_time: i64) -> Vec<T>{
     let naive = NaiveDateTime::from_timestamp(_unix_time.into(), 0);
     
     let datetime: DateTime<Utc> = DateTime::from_utc(naive, Utc);
@@ -26,6 +26,5 @@ fn get_real_time(_unix_time: i64){
     let timeFormatted = format!("{}", timeUnstructured);
     let time = timeFormatted.split(" ").collect::<Vec<_>>();
 
-
-    println!("{:?}", time);
+    time;
 }
