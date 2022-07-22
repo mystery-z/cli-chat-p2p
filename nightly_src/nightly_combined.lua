@@ -16,7 +16,7 @@ local function server_send()
 	local myip, myport = server:getsockname()
 	-- print a message informing what's up
 	print("Please connect to localhost on port " .. myport .. " and [local] ip " .. myip)
-	print("After connecting, you have 30seconds to connect")
+	print("After connecting, you have 30 seconds to connect")
 	-- loop forever waiting for clients
 	while 1 do
 	  -- wait for a connection from any client
@@ -47,7 +47,6 @@ local function client_listen()
 	--note the newline below
 	tcp:send("first msg\n");
 --~ print("sent;")
---~ fix the next 7 lines to continue listening, not just to close connection when done
 	while true do
 		local msg, status, partial = tcp:receive()
 		if msg ~= nil then

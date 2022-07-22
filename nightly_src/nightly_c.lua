@@ -19,6 +19,7 @@ socket = require("socket")
 --~ print("closin;")
 --~ tcp:close()
 
+
 --~ fallback verson 2:
 
 
@@ -33,7 +34,6 @@ local function client_listen()
 	--note the newline below
 	tcp:send("first msg\n");
 --~ print("sent;")
---~ fix the next 7 lines to continue listening, not just to close connection when done
 	while true do
 		local msg, status, partial = tcp:receive()
 		if msg ~= nil then
