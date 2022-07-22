@@ -33,7 +33,7 @@ local function server_send()
 	end
 	--~ client:close() 
 
-end
+end --~and no this is not an error, there's meant to be 2 ends
 end
 
 local function client_listen()
