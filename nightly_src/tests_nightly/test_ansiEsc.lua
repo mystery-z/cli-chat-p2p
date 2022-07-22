@@ -3,3 +3,4 @@
 print("\x1b[1;31m" .. "wtf is this actually red and bold")
   --~  Set style to bold, red foreground.
 
+--~ https://github.com/ldrumm/lua-chroma
