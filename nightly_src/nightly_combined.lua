@@ -6,55 +6,56 @@
 local socket = require("socket")
 
 myport = math.random(7000, 7999)
+localIP = socket.dns.toip(socket.dns.gethostname())
 
 
 
 local function server_send()
-	local server = assert(socket.bind("192.168.1.11", myport)) 
-	--~ change this part later to get ipv4 ip
-		
-	local myip, myport = server:getsockname()
-	-- print a message informing what's up
-	print("Please connect to localhost on port " .. myport .. " and [local] ip " .. myip)
-	print("After connecting, you have 30 seconds to connect")
-	-- loop forever waiting for clients
-	while 1 do
-	  -- wait for a connection from any client
-	  local client = server:accept()
-	  -- make sure we don't block waiting for this client's line
-	  client:settimeout(30)
-	  if client == true then end
-	  -- receive the line
-	while 1 do   
-	  io.write(">>")
-	  local msg = io.read()
-      client:send(msg.."\n") 
-      --~ must add "\n" otherwise won't work 
-	end
-	--~ client:close() 
+   local server = assert(socket.bind(localIP, myport))
+   --~ change this part later to get ipv4 ip
 
-end --~and no this is not an error, there's meant to be 2 ends
+   local myip, myport = server:getsockname()
+   -- print a message informing what's up
+   print("Please connect to localhost on port " .. myport .. " and [local] ip " .. myip)
+   print("After connecting, you have 30 seconds to connect")
+   -- loop forever waiting for clients
+   while 1 do
+      -- wait for a connection from any client
+      local client = server:accept()
+      -- make sure we don't block waiting for this client's line
+      client:settimeout(30)
+      if client == true then end
+      -- receive the line
+      while 1 do   
+         io.write(">>")
+         local msg = io.read()
+         client:send(msg.."\n") 
+         --~ must add "\n" otherwise won't work 
+      end
+      --~ client:close() 
+
+   end --~and no this is not an error, there's meant to be 2 ends
 end
 
 local function client_listen()
-	tcp = assert(socket.tcp())
-	--~ init tcp
-	io.write("Port [to connect to]: ")
-	port = io.read()
-	io.write("IP address [to connect to]: ")
-	ip = io.read()
-	tcp:connect(ip, port);
-	--note the newline below
-	tcp:send("first msg\n");
---~ print("sent;")
-	while true do
-		local msg, status, partial = tcp:receive()
-		if msg ~= nil then
-			print(msg or partial)
-		else end
-	end
---~ print("closin;")
-	--~ tcp:close()
+   tcp = assert(socket.tcp())
+   --~ init tcp
+   io.write("Port [to connect to]: ")
+   port = io.read()
+   io.write("IP address [to connect to]: ")
+   ip = io.read()
+   tcp:connect(ip, port);
+   --note the newline below
+   tcp:send("first msg\n");
+   --~ print("sent;")
+   while true do
+      local msg, status, partial = tcp:receive()
+      if msg ~= nil then
+         print(msg or partial)
+      else end
+   end
+   --~ print("closin;")
+   --~ tcp:close()
 end
 
 server_send()

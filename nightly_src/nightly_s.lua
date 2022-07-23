@@ -1,6 +1,5 @@
 local socket = require("socket")
 
-
 --~ fallback versoin 1:
 --~ local function open_server() -- create a TCP socket and bind it to the local host, at any port
 	--~ local server = assert(socket.bind("*", 3009))
