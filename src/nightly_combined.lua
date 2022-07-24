@@ -12,7 +12,6 @@ localIP = socket.dns.toip(socket.dns.gethostname())
 
 
 local function server_send()
-<<<<<<< HEAD
    -- Starts send server 
    local server = assert(socket.bind(localIP, myport))
 
