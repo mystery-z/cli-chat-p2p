@@ -4,6 +4,7 @@
 --~ client is menat to listen and print all but nil
 
 local socket = require("socket")
+local lanes = require("lanes")
 
 myport = math.random(7000, 7999)
 localIP = socket.dns.toip(socket.dns.gethostname())
@@ -11,10 +12,14 @@ localIP = socket.dns.toip(socket.dns.gethostname())
 
 
 local function server_send()
+   -- Starts send server 
    local server = assert(socket.bind(localIP, myport))
-   --~ change this part later to get ipv4 ip
 
    local myip, myport = server:getsockname()
+
+   -- FIX THIS SO THAT YOU DONT NEED TO SHOW THIS TO THE OTHER PERSON
+      -- COULD POSSIBLY HAVE THE OTHER USER SEARCH ALL 1000 PORTS FOR A SPECFIC PACKET
+      -- try using udp for the start so that it can connnect
    -- print a message informing what's up
    print("Please connect to localhost on port " .. myport .. " and [local] ip " .. myip)
    print("After connecting, you have 30 seconds to connect")
@@ -24,12 +29,11 @@ local function server_send()
       local client = server:accept()
       -- make sure we don't block waiting for this client's line
       client:settimeout(30)
-      if client == true then end
       -- receive the line
-      while 1 do   
+      while true do
          io.write(">>")
          local msg = io.read()
-         client:send(msg.."\n") 
+         client:send(msg.."\n")
          --~ must add "\n" otherwise won't work 
       end
       --~ client:close() 
@@ -46,7 +50,7 @@ local function client_listen()
    ip = io.read()
    tcp:connect(ip, port);
    --note the newline below
-   tcp:send("first msg\n");
+   tcp:send("Connected\n");
    --~ print("sent;")
    while true do
       local msg, status, partial = tcp:receive()
@@ -55,11 +59,15 @@ local function client_listen()
       else end
    end
    --~ print("closin;")
-   --~ tcp:close()
+   -- tcp:close()
 end
 
 server_send()
 client_listen()
+
+
+
+
 --~ next steps:
 --~ 1.get the above two functoins to work in concurrent mode
 --~ 2. lines 13 and 14
