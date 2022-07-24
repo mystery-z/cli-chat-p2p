@@ -12,6 +12,7 @@ localIP = socket.dns.toip(socket.dns.gethostname())
 
 
 local function server_send()
+<<<<<<< HEAD
    -- Starts send server 
    local server = assert(socket.bind(localIP, myport))
 
@@ -38,7 +39,7 @@ local function server_send()
       end
       --~ client:close() 
 
-   end --~and no this is not an error, there's meant to be 2 ends
+	end --~and no this is not an error, there's meant to be 2 ends
 end
 
 local function client_listen()
