@@ -1,10 +1,16 @@
 require 'socket' 
+require 'thread'
 
-def listener()
+ip = '192.168.1.11'
+port = 1880
+
+#~ delete here latr
+myip = '192.168.1.11'
+myport = 1880
+
+def listener(myip, myport)
   #import port and hostname
-  hostname = '192.168.1.11' 
-  port = 1880
-  open_Socket = TCPSocket.open(hostname, port)
+  open_Socket = TCPSocket.open(ip, port)
 
   loop do
     # receive msg from socket
@@ -20,8 +26,8 @@ def listener()
 end
 #~ works
 
-def sender()
-  server = TCPServer.new('192.168.1.11', 1880)
+def sender(myip, myport)
+  server = TCPServer.new(myip, myport)
    # somehow works with global ip but requires port forwarding
   loop do 
     client = server.accept
@@ -29,11 +35,25 @@ def sender()
     # Servers run forever       
       print(">>") 
       msg = gets
-      client.print(msg)         
+      json_packer(myip, myport, msg)     
+      #~ make the packed json the sent thing, not msg
+      client.print(msg)       
     end
   end
 end
 #~ works
 
-#~ sender()
-listener()
+def json_packer(myip, myport, msg)
+  time = Time.new
+  time = time.inspect
+  json_data = "{'ip': '#{myip}', 'port': #{myport}, 'msg': '#{msg}', 'time':'#{time}'}"
+  file = File.new("send.json", "w")
+  file.syswrite(json_data)
+  file.close()
+end
+
+
+#~ listener(ip, port)
+sender(ip,port)
+
+
