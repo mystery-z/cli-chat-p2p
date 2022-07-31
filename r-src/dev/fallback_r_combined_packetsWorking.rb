@@ -1,7 +1,6 @@
 require 'socket' 
 require 'thread'
 require 'json'
-require 'logger'
 
 # [TODO] delete these later
 ip = '192.168.1.11'
@@ -80,11 +79,7 @@ def json_unpacker(msg)
   $parsed_msg = data['msg']
 end
 
-def chatLogger()
- # [TODO] do the chatLogger thing
-end
-
-#~ listener(myip, port)
-sender(ip,port)
+listener(myip, port)
+#~ sender(ip,port)
 
 
