@@ -30,3 +30,4 @@
 *.so
 *.so.*
 *.dylib
+.DS_Store
