@@ -2,15 +2,18 @@ require 'socket'
 require 'thread'
 require 'json'
 require 'logger'
+require 'fiber_scheduler'
+
+Fiber.set_scheduler FiberScheduler.new
 
 # [TODO] delete these later
-ip = '192.168.1.11'
-port = 1880
+ip = '192.168.1.10'
+port = 1884
 
 myip = '192.168.1.11'
-myport = 1880
+myport = 1884
 
-def listener(ip, port)
+def listener(ip, port) #~ this is the ip and port that this will listen from
   #~ open for an ip and port
   open_Socket = TCPSocket.open(ip, port)
   loop do
@@ -28,7 +31,7 @@ def listener(ip, port)
 end
 #~ works
 
-def sender(myip, myport)
+def sender(myip, myport) #~ this is the ip and port taht is being opened on this computer
   server = TCPServer.new(myip, myport)
   #~ somehow works with global ip but requires port forwarding
   loop do 
@@ -38,7 +41,7 @@ def sender(myip, myport)
       print(">>") 
       msg = gets
       msg = msg.chop()
-      json_packer(myip, myport, msg)     
+      json_packer(ip, myport, msg)     
       #~ json_packer puts the msg inside the formatted json, MUST use file.READ not file.OPEN
       json_msg = File.read("send.json")
       client.print(json_msg)       
@@ -84,7 +87,15 @@ def chatLogger()
  # [TODO] do the chatLogger thing
 end
 
-#~ listener(myip, port)
-sender(ip,port)
 
+ 
+
+Fiber.schedule do
+	listener(myip, myport)
+end
+
+
+Fiber.schedule do
+	sender(myip, myport)
+end
 
