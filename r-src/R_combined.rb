@@ -2,23 +2,20 @@ require 'socket'
 require 'thread'
 require 'json'
 require 'logger'
-require 'fiber_scheduler'
 
-Fiber.set_scheduler FiberScheduler.new
 
 # [TODO] delete these later
 ip = '192.168.1.11'
-port = 1884
+port = 1889
 
-myip = '192.168.1.11'
+myip = '192.168.1.10'
 myport = 1884
 
 def listener(ip, port) #~ this is the ip and port that this will listen from
   #~ open for an ip and port
-  open_Socket = TCPSocket.open(ip, port)
   loop do
     #~ receive msg from socket
-    msg = open_Socket.gets     
+    msg = $open_Socket.gets     
     if msg != nil
       #~ unpack the json file
       json_unpacker(msg)
@@ -89,12 +86,12 @@ end
 
 def init_connection(ip,port)
   begin
-    open_Socket = TCPSocket.open(ip, port)
+    $open_Socket = TCPSocket.open(ip, port)
   rescue
 	retry
   end
   listener(ip,port)
 end
 
-#~ init_connection(ip,port)
-sender(myip,myport)
+init_connection(ip,port)
+#~ sender(myip,myport)
