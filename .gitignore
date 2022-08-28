@@ -31,3 +31,4 @@
 *.so.*
 *.dylib
 .DS_Store
+r-src/send.json
