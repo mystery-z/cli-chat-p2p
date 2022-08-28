@@ -6,10 +6,10 @@ require 'logger'
 
 # [TODO] delete these later
 ip = '192.168.1.11'
-port = 1889
+port = 2005
 
-myip = '192.168.1.10'
-myport = 1884
+myip = '192.168.1.11'
+myport = 2005
 
 def listener(ip, port) #~ this is the ip and port that this will listen from
   #~ open for an ip and port
@@ -84,7 +84,14 @@ def chatLogger()
  # [TODO] do the chatLogger thing
 end
 
-def init_connection(ip,port)
+def init_connection(ip,port,myip,myport)
+  t1 = Thread.new{trial_connect_listen(ip,port)}
+  t2 = Thread.new{sender(myip,myport)}
+  t1.join
+  t2.join
+end
+
+def trial_connect_listen(ip,port)
   begin
     $open_Socket = TCPSocket.open(ip, port)
   rescue
@@ -93,5 +100,6 @@ def init_connection(ip,port)
   listener(ip,port)
 end
 
-init_connection(ip,port)
-#~ sender(myip,myport)
+
+
+init_connection(ip,port,myip,myport)
