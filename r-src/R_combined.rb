@@ -5,11 +5,11 @@ require 'logger'
 
 
 # [TODO] delete these later
-ip = '192.168.1.11'
-port = 2005
+ip = '192.168.1.10'
+port = 4000
 
 myip = '192.168.1.11'
-myport = 2005
+myport = 4000
 
 def listener(ip, port) #~ this is the ip and port that this will listen from
   #~ open for an ip and port
@@ -20,7 +20,7 @@ def listener(ip, port) #~ this is the ip and port that this will listen from
       #~ unpack the json file
       json_unpacker(msg)
       #~ print the msg
-      puts($parsed_msg)  
+      print($parsed_msg)  
     else 
       next
     end
@@ -35,7 +35,6 @@ def sender(myip, myport) #~ this is the ip and port taht is being opened on this
     client = server.accept
     loop do         
     #~ Server runs forever       
-      print(">>") 
       msg = gets
       msg = msg.chop()
       json_packer(myip, myport, msg)     
@@ -77,7 +76,7 @@ def json_unpacker(msg)
   #~ load the json file
   data = JSON.load(file1)
   #~ save the actual parsed msg as a global var
-  $parsed_msg = data['msg']
+  $parsed_msg = "[notme]>> "+data['msg'] + "\n >>"
 end
 
 def chatLogger()
