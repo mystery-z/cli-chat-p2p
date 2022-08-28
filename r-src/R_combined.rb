@@ -7,7 +7,7 @@ require 'fiber_scheduler'
 Fiber.set_scheduler FiberScheduler.new
 
 # [TODO] delete these later
-ip = '192.168.1.10'
+ip = '192.168.1.11'
 port = 1884
 
 myip = '192.168.1.11'
@@ -41,7 +41,7 @@ def sender(myip, myport) #~ this is the ip and port taht is being opened on this
       print(">>") 
       msg = gets
       msg = msg.chop()
-      json_packer(ip, myport, msg)     
+      json_packer(myip, myport, msg)     
       #~ json_packer puts the msg inside the formatted json, MUST use file.READ not file.OPEN
       json_msg = File.read("send.json")
       client.print(json_msg)       
@@ -87,15 +87,14 @@ def chatLogger()
  # [TODO] do the chatLogger thing
 end
 
-
- 
-
-Fiber.schedule do
-	listener(myip, myport)
+def init_connection(ip,port)
+  begin
+    open_Socket = TCPSocket.open(ip, port)
+  rescue
+	retry
+  end
+  listener(ip,port)
 end
 
-
-Fiber.schedule do
-	sender(myip, myport)
-end
-
+#~ init_connection(ip,port)
+sender(myip,myport)
