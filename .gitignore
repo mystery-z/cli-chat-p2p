@@ -33,3 +33,5 @@
 .DS_Store
 r-src/send.json
 *.json
+r-src/received.json
+r-src/send.json

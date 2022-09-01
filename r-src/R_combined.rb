@@ -6,10 +6,10 @@ require 'logger'
 
 # [TODO] delete these later
 ip = '192.168.1.10'
-port = 4000
+port = 5006
 
 myip = '192.168.1.11'
-myport = 4000
+myport = 5006
 
 def listener(ip, port) #~ this is the ip and port that this will listen from
   #~ open for an ip and port
@@ -26,7 +26,6 @@ def listener(ip, port) #~ this is the ip and port that this will listen from
     end
   end
 end
-#~ works
 
 def sender(myip, myport) #~ this is the ip and port taht is being opened on this computer
   server = TCPServer.new(myip, myport)
@@ -41,11 +40,11 @@ def sender(myip, myport) #~ this is the ip and port taht is being opened on this
       #~ json_packer puts the msg inside the formatted json, MUST use file.READ not file.OPEN
       json_msg = File.read("send.json")
       client.print(json_msg)       
+      print(">>")
       #~ get the correctly formatted packet and send it (previous TWO lines)
     end
   end
 end
-#~ works
 
 def json_packer(myip, myport, msg)
   #~ get the time
@@ -76,27 +75,28 @@ def json_unpacker(msg)
   #~ load the json file
   data = JSON.load(file1)
   #~ save the actual parsed msg as a global var
-  $parsed_msg = "[notme]>> "+data['msg'] + "\n >>"
+  $parsed_msg = "[#{data['ip']}:#{data['port']}]: "+data['msg'] + "\n>>"
 end
 
-def chatLogger()
- # [TODO] do the chatLogger thing
-end
-
-def init_connection(ip,port,myip,myport)
-  t1 = Thread.new{trial_connect_listen(ip,port)}
+def init_connection(ip,port,myip,myport) #~ initialisation of the connection
+  t1 = Thread.new{trial_connect_listen(ip,port)} #~ multithreading trial_connect_listen and sender
   t2 = Thread.new{sender(myip,myport)}
   t1.join
   t2.join
 end
 
-def trial_connect_listen(ip,port)
-  begin
+def trial_connect_listen(ip,port) 
+  begin #~ inf. loop of trying to listen from ip, port
     $open_Socket = TCPSocket.open(ip, port)
   rescue
 	retry
   end
-  listener(ip,port)
+  print(">>")
+  listener(ip,port) #~ when the trial is done just switch to listener
+end
+
+def chatLogger()
+ # [TODO] do the chatLogger thing
 end
 
 
