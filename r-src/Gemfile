@@ -6,4 +6,3 @@ source "https://rubygems.org"
 
 gem 'json', '~> 1.8', '>= 1.8.3'
 gem 'logger', '~> 1.5', '>= 1.5.1'
-gem 'fiber_scheduler', '~> 0.13.0'

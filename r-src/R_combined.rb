@@ -5,11 +5,11 @@ require 'logger'
 
 
 # [TODO] delete these later
-ip = '192.168.1.10'
-port = 5006
+ip = '10.180.1.161'
+port = 5009
 
-myip = '192.168.1.11'
-myport = 5006
+myip = '10.180.10.108'
+myport = 5009
 
 def listener(ip, port) #~ this is the ip and port that this will listen from
   #~ open for an ip and port
@@ -98,7 +98,5 @@ end
 def chatLogger()
  # [TODO] do the chatLogger thing
 end
-
-
 
 init_connection(ip,port,myip,myport)

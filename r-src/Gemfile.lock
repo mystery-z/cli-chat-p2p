@@ -1,7 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    fiber_scheduler (0.13.0)
     json (1.8.6)
     logger (1.5.1)
 
@@ -9,7 +8,6 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
-  fiber_scheduler (~> 0.13.0)
   json (~> 1.8, >= 1.8.3)
   logger (~> 1.5, >= 1.5.1)
 
