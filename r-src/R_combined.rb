@@ -8,8 +8,11 @@ require 'logger'
 ip = '10.180.1.161'
 port = 5009
 
-myip = '10.180.10.108'
-myport = 5009
+
+myip = ((Socket.ip_address_list.detect{|intf| intf.ipv4_private?}).ip_address).delete_suffix("%") #~ totally not the easiest way to get device local IP 
+myport = 5010
+
+
 
 def listener(ip, port) #~ this is the ip and port that this will listen from
   #~ open for an ip and port
@@ -78,13 +81,6 @@ def json_unpacker(msg)
   $parsed_msg = "[#{data['ip']}:#{data['port']}]: "+data['msg'] + "\n>>"
 end
 
-def init_connection(ip,port,myip,myport) #~ initialisation of the connection
-  t1 = Thread.new{trial_connect_listen(ip,port)} #~ multithreading trial_connect_listen and sender
-  t2 = Thread.new{sender(myip,myport)}
-  t1.join
-  t2.join
-end
-
 def trial_connect_listen(ip,port) 
   begin #~ inf. loop of trying to listen from ip, port
     $open_Socket = TCPSocket.open(ip, port)
@@ -95,8 +91,17 @@ def trial_connect_listen(ip,port)
   listener(ip,port) #~ when the trial is done just switch to listener
 end
 
-def chatLogger()
- # [TODO] do the chatLogger thing
+def init_connection(ip,port,myip,myport) #~ initialisation of the connection
+  t1 = Thread.new{trial_connect_listen(ip,port)} #~ multithreading trial_connect_listen and sender
+  t2 = Thread.new{sender(myip,myport)}
+  t1.join
+  t2.join
+end
+
+def chatLogger(ip,port)
+	directory_name = "#{ip}:#{port}"
+	Dir.mkdir(directory_name) unless File.exists?(directory_name)
+
 end
 
 init_connection(ip,port,myip,myport)
