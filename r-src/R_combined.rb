@@ -5,13 +5,17 @@ require 'logger'
 
 
 # [TODO] delete these later
-ip = '10.180.1.161'
-port = 5009
+ip = '192.168.1.10'
+port = 4000
 
 
 myip = ((Socket.ip_address_list.detect{|intf| intf.ipv4_private?}).ip_address).delete_suffix("%") #~ totally not the easiest way to get device local IP 
-myport = 5010
+myport = 4000
 
+def init_setup()
+	directory_name = "chatLogs"
+	Dir.mkdir(directory_name) unless File.exists?(directory_name)
+end
 
 
 def listener(ip, port) #~ this is the ip and port that this will listen from
@@ -21,7 +25,7 @@ def listener(ip, port) #~ this is the ip and port that this will listen from
     msg = $open_Socket.gets     
     if msg != nil
       #~ unpack the json file
-      json_unpacker(msg)
+      json_unpacker(msg, ip, port)
       #~ print the msg
       print($parsed_msg)  
     else 
@@ -68,8 +72,19 @@ def json_packer(myip, myport, msg)
   file.close
 end
 
-def json_unpacker(msg)
-  #~ open a new file and dump the packet in
+def json_unpacker(msg, ip, port)
+   #~ open a new file and dump the packet in
+  #~ Dir.chdir("chatLogs") #~ cd into chatLogs folder
+  
+  #~ directory_name = "#{ip},#{port}"
+  #~ Dir.mkdir(directory_name) unless File.exists?(directory_name)
+  
+  #~ if File.exists?("temp.txt") == False
+    #~ File.new("#{ip}: #{port}.log", "w") #~ check if log file exists already 
+  #~ end
+  #~ logFile = File.open("#{ip}: #{port}.log", "a") #~ open the log file
+  #~ logFile.syswrite(msg) #~ write to the log file
+  
   file = File.new("received.json","w")
   file.syswrite(msg)
   file.close
@@ -99,9 +114,10 @@ def init_connection(ip,port,myip,myport) #~ initialisation of the connection
 end
 
 def chatLogger(ip,port)
-	directory_name = "#{ip}:#{port}"
-	Dir.mkdir(directory_name) unless File.exists?(directory_name)
+	
 
 end
+
+init_setup()
 
 init_connection(ip,port,myip,myport)
