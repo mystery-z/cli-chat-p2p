@@ -35,3 +35,4 @@ r-src/send.json
 *.json
 r-src/received.json
 r-src/send.json
+cli-chat-p2p

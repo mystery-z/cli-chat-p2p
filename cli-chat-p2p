@@ -27,15 +27,14 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=7
-FILE_NAME_0=312;CSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fcss%2Fmain.css;0;4
+current_page=0
+FILE_NAME_0=2366;CSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fcss%2Fmain.css;0;4
 FILE_NAME_1=124;SCSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fscss%2Fbase%2F__variables.scss;0;4
 FILE_NAME_2=959;SCSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fscss%2Fcomponents%2F__todos.scss;0;4
 FILE_NAME_3=0;SCSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fscss%2Fpages%2F__general.scss;0;4
 FILE_NAME_4=2279;SCSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fscss%2Fpages%2F__homepage.scss;0;4
 FILE_NAME_5=0;SCSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fscss%2Fcomponents%2F__left-navbar.scss;0;4
 FILE_NAME_6=216;SCSS;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcustom-css%2Fsrc%2Fscss%2Fmain.scss;0;4
-FILE_NAME_7=297;Ruby;0;EUTF-8;1;1;0;%2FUsers%2Fjuwoncha%2FDocuments%2FGitHub%2Fcli-chat-p2p%2Fr-src%2FR_combined.rb;0;4
 
 [VTE]
 last_dir=/Users/juwoncha
