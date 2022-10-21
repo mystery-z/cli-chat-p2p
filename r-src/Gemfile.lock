@@ -1,14 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    json (1.8.6)
+    json (2.3.0)
     logger (1.5.1)
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
-  json (~> 1.8, >= 1.8.3)
+  json (~> 2.3)
   logger (~> 1.5, >= 1.5.1)
 
 BUNDLED WITH
