@@ -5,12 +5,11 @@ require 'logger'
 
 
 # [TODO] delete these later
-ip = '192.168.1.10'
-port = 4000
-
+ip = '192.168.1.6'
+port = 9016
 
 myip = ((Socket.ip_address_list.detect{|intf| intf.ipv4_private?}).ip_address).delete_suffix("%") #~ totally not the easiest way to get device local IP 
-myport = 4000
+myport = 9015
 
 def init_setup()
 	directory_name = "chatLogs"
@@ -26,6 +25,7 @@ def listener(ip, port) #~ this is the ip and port that this will listen from
     if msg != nil
       #~ unpack the json file
       json_unpacker(msg, ip, port)
+      chatLogger(ip,port,msg)
       #~ print the msg
       print($parsed_msg)  
     else 
@@ -43,9 +43,10 @@ def sender(myip, myport) #~ this is the ip and port taht is being opened on this
     #~ Server runs forever       
       msg = gets
       msg = msg.chop()
-      json_packer(myip, myport, msg)     
+      json_packer(myip, myport, msg)  
       #~ json_packer puts the msg inside the formatted json, MUST use file.READ not file.OPEN
       json_msg = File.read("send.json")
+       chatLogger(myip,myport,json_msg)   
       client.print(json_msg)       
       print(">>")
       #~ get the correctly formatted packet and send it (previous TWO lines)
@@ -73,7 +74,7 @@ def json_packer(myip, myport, msg)
 end
 
 def json_unpacker(msg, ip, port)
-   #~ open a new file and dump the packet in
+  #~ open a new file and dump the packet in
   #~ Dir.chdir("chatLogs") #~ cd into chatLogs folder
   
   #~ directory_name = "#{ip},#{port}"
@@ -113,9 +114,17 @@ def init_connection(ip,port,myip,myport) #~ initialisation of the connection
   t2.join
 end
 
-def chatLogger(ip,port)
-	
-
+def chatLogger(ip,port,msg)
+	if File.exist?("#{ip}.json") == true
+		logger_File = File.new("#{ip}.json")
+		logger_File = File.open("#{ip}.json", "a")
+		logger_File.write(msg)
+		logger_File.close()
+	else
+		logger_File = File.open("#{ip}.json", "a")
+		logger_File.write(msg)
+		logger_File.close()
+	end
 end
 
 init_setup()
