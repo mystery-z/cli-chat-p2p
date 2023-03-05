@@ -4,7 +4,7 @@ require 'json'
 require 'logger'
 
 
-# [TODO] delete these later
+# [TODO delete these later
 ip = '192.168.1.6'
 port = 9016
 
@@ -65,7 +65,7 @@ def json_packer(myip, myport, msg)
     "time" => "#{time}", 
     "msg"=> "#{msg}" 
   } 
-  # [IMPORTANT, TODO] change myport back to an integer (from string) later
+  # [IMPORTANT, TODO change myport back to an integer (from string) later
   #~ write the actual .json file
   file = File.new("send.json", "w")
   file.syswrite(json_data.to_json+"\n")
