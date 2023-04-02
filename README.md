@@ -4,7 +4,7 @@
 
 `cli-chat-p2p` is a completely P2P chat app, written in Ruby (and soon porting to lua). 
 
-In essence, it is a peer-to-peer messaging application using the Ruby language and leveraging the logger, thread, and socket libraries. 
+In essence, it is a peer-to-peer messaging application made using the Ruby language and leveraging the logger, thread, and socket libraries. 
 
 ## Skills gained:
 
