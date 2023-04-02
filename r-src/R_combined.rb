@@ -5,12 +5,14 @@ require 'logger'
 
 
 # [TODO] delete these later
-ip = '10.180.1.161'
-port = 5009
+puts "IP to connect to>>"
+ip = gets
+
+port = 5008
 
 
 myip = ((Socket.ip_address_list.detect{|intf| intf.ipv4_private?}).ip_address).delete_suffix("%") #~ totally not the easiest way to get device local IP 
-myport = 5010
+myport = 5008
 
 
 
